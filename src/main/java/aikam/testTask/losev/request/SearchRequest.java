@@ -1,5 +1,6 @@
-package aikam.testTask.losev;
+package aikam.testTask.losev.request;
 
+import aikam.testTask.losev.request.criterias.Criteria;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

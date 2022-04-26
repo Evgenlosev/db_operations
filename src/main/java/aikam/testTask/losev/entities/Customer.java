@@ -25,7 +25,7 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer")
     private List<Purchase> purchases;
 
     public Customer(Long id, String firstName, String lastName) {

@@ -1,4 +1,4 @@
-package aikam.testTask.losev;
+package aikam.testTask.losev.request.criterias;
 
 
 import lombok.AllArgsConstructor;
@@ -11,10 +11,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Criteria {
-//    private CriteriaLastName criteriaLastName;
-//    private CriteriaProduct criteriaProduct;
-//    private CriteriaExpenses criteriaExpenses;
-//    private CriteriaBadCustomers criteriaBadCustomers;
     private String lastName;
     private String productName;
     private int minTimes;
