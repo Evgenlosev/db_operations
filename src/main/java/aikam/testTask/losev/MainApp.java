@@ -8,11 +8,15 @@ import aikam.testTask.losev.response.SearchResponse;
 import aikam.testTask.losev.response.StatResponse;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+
 
 import java.io.File;
 
+@Slf4j
 public class MainApp {
 
+    public static ObjectMapper objectMapper;
     public static void main(String[] args) throws Exception {
 
         try {
@@ -25,13 +29,14 @@ public class MainApp {
 
     private static void start(String[] args) throws ApplicationException {
         if (args.length != 3) {
-            System.out.println("Неверный формат ввода команды");
-            return;
+            log.error("Неверный формат ввода команды");
+            System.exit(1);
         }
 
         File outputFile = new File(args[2]);
         if (!outputFile.canWrite()) {
-            System.out.println("Ошибка доступа к выходному файлу");
+            log.error("Ошибка доступа к выходному файлу");
+            System.exit(1);
         }
 
         if (!args[0].equalsIgnoreCase("stat") && !args[0].equalsIgnoreCase("search")) {
@@ -47,30 +52,30 @@ public class MainApp {
         }
 
         String commandType = args[0];
-        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper = new ObjectMapper();
 
         switch (commandType) {
             case ("search"):
-                SearchRequest searchRequest = parseObjectFromJson(objectMapper, inputFile, SearchRequest.class);
+                SearchRequest searchRequest = parseJsonToObject(inputFile, SearchRequest.class);
                 SearchResponse searchResponse = RequestHandler.requestHandling(searchRequest);
-                parseObjectToJson(objectMapper, outputFile, searchResponse);
+                parseObjectToJson(outputFile, searchResponse);
             case ("stat"):
-                StatRequest statRequest = parseObjectFromJson(objectMapper,inputFile, StatRequest.class);
+                StatRequest statRequest = parseJsonToObject(inputFile, StatRequest.class);
                 StatResponse statResponse = RequestHandler.requestHandling(statRequest);
-                parseObjectToJson(objectMapper, outputFile, statResponse);
+                parseObjectToJson(outputFile, statResponse);
         }
     }
 
-    private static void parseObjectToJson(ObjectMapper objectMapper, File outputFile, Object object) throws ApplicationException {
+    private static void parseObjectToJson(File outputFile, Object object) {
         try {
             objectMapper.writeValue(outputFile, object);
         } catch (Exception e) {
-            throw new ApplicationException("Ошибка при создании выходного файла");
-
+            log.error("Ошибка доступа к выходному файлу");
+            System.exit(1);
         }
     }
 
-    private static <T> T parseObjectFromJson (ObjectMapper objectMapper, File src, Class<T> valueType) throws ApplicationException {
+    private static <T> T parseJsonToObject(File src, Class<T> valueType) throws ApplicationException {
         try {
             T object = objectMapper.readValue(src, valueType);
             return object;
