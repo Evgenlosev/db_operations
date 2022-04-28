@@ -1,0 +1,7 @@
+{
+	"criterias": [ 
+	    {"badCustomers": 2},
+	    {"minExpenses": 500, "maxExpenses": 4000}
+      ]
+}
+

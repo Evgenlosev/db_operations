@@ -1,0 +1,10 @@
+{
+	"criterias": [ 
+	    {"lastName": "Петров"},
+	    {"lastName": "Синицин"}, 	 
+	    {"productName": "Хлеб", "minTimes": 3}, 
+	    {"minExpenses": 0, "maxExpenses": 60},
+	    {"badCustomers": 4}
+      ]
+}
+
