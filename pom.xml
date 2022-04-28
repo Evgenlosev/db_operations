@@ -57,7 +57,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>aikam.testTask.losev.MainApp</mainClass>
+                            <mainClass>ru.aikam.testTask.losev.MainApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
