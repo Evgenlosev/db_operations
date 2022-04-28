@@ -36,14 +36,11 @@ public class StatResponse {
 
     public void calculateTotalDays(LocalDate startDate, LocalDate endDate) {
         int weekDays = 0;
-        while (startDate.isBefore(endDate)) {
+        while (startDate.isBefore(endDate.minusDays(1))) {
             if (startDate.getDayOfWeek().getValue() != 6 && startDate.getDayOfWeek().getValue() != 7) {
                 weekDays++;
             }
             startDate = startDate.plusDays(1);
-        }
-        if (endDate.getDayOfWeek().getValue() != 6 && endDate.getDayOfWeek().getValue() != 7) {
-            weekDays++;
         }
         totalDays = weekDays;
     }

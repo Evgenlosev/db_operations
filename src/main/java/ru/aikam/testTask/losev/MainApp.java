@@ -23,6 +23,7 @@ public class MainApp {
         } catch (ApplicationException e) {
             parseObjectToJson(new File(args[2]), new ApplicationError(e.getMessage()));
         }
+        System.out.print("Finished");
     }
 
     private static void start(String[] args) throws ApplicationException {
@@ -63,7 +64,6 @@ public class MainApp {
         try {
             objectMapper.writeValue(outputFile, object);
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("Ошибка доступа к выходному файлу");
             System.exit(1);
         }
