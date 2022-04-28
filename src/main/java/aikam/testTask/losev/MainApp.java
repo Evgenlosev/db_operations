@@ -59,10 +59,12 @@ public class MainApp {
                 SearchRequest searchRequest = parseJsonToObject(inputFile, SearchRequest.class);
                 SearchResponse searchResponse = RequestHandler.requestHandling(searchRequest);
                 parseObjectToJson(outputFile, searchResponse);
+                break;
             case ("stat"):
                 StatRequest statRequest = parseJsonToObject(inputFile, StatRequest.class);
                 StatResponse statResponse = RequestHandler.requestHandling(statRequest);
                 parseObjectToJson(outputFile, statResponse);
+                break;
         }
     }
 

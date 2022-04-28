@@ -59,8 +59,9 @@ public class CustomerDao {
             List<Customer> customers = session.createNativeQuery(
                     "select c.id, c.first_name, c.last_name from customers c " +
                             "left join purchases p on c.id = p.customer_id " +
+                            "left join products prod on p.product_id = prod.id " +
                             "group by c.id " +
-                            "having sum(p.price) >= :minExpenses and sum(p.price) <= :maxExpenses ;")
+                            "having sum(prod.price) >= :minExpenses and sum(prod.price) <= :maxExpenses ;")
                     .setParameter("minExpenses", expensesCriteria.getMinExpenses())
                     .setParameter("maxExpenses", expensesCriteria.getMaxExpenses())
                     .addEntity(Customer.class).list();
